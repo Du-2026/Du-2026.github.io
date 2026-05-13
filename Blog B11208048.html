@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不只是修路燈！英國地方選舉深度觀察</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ukblue: '#00247D',
+                        ukred: '#CF142B',
+                        slate: {
+                            950: '#0a0f1a',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        body: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0f1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .accent-gradient {
+            background: linear-gradient(90deg, #00247D, #CF142B);
+        }
+        .prose p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+        .prose h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #60a5fa, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+        }
+        ::selection {
+            background: #CF142B;
+            color: white;
+        }
+    </style>
+</head>
+<body class="font-body">
+
+    <!-- Header / Navigation Placeholder Style -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-slate-950/50 border-b border-white/5">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full accent-gradient animate-pulse"></div>
+            <span class="font-display font-extrabold text-xl tracking-tighter uppercase">Insight UK</span>
+        </div>
+        <div class="text-xs font-display tracking-widest text-slate-400">STUDENT ID: B11208048</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-ukblue/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-ukred/10 rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 max-w-5xl w-full">
+            <div class="mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <span class="px-4 py-1.5 rounded-full border border-ukred/50 text-ukred font-semibold text-sm tracking-wide bg-ukred/5">
+                    POLITICS & SOCIETY
+                </span>
+            </div>
+            
+            <h1 class="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 gradient-text animate-fade-in-up" style="animation-delay: 0.2s;">
+                不只是修路燈！<br/>
+                帶你吃瓜英國地方選舉
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mb-12 animate-fade-in-up" style="animation-delay: 0.3s;">
+                這場「家門口的大戲」為何讓唐寧街 10 號的首相倍感壓力？探尋民主政治最真實的末梢神經。
+            </p>
+
+            <!-- Banner Image -->
+            <div class="relative w-full aspect-video rounded-3xl overflow-hidden glass-card animate-fade-in-up shadow-2xl" style="animation-delay: 0.4s;">
+                <img src='https://opal.google/board/blobs/ed2518da-471f-4643-a378-4c9f6583e347' alt='British Local Elections Concept' class="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-700" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                <div class="absolute bottom-8 left-8">
+                    <p class="text-sm font-display text-white/60 tracking-widest uppercase">Visual Representation</p>
+                    <p class="text-white font-medium">英國政壇 2024 年度關鍵前哨戰</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="relative z-10 max-w-4xl mx-auto px-6 pb-32">
+        
+        <!-- Intro Quote -->
+        <div class="mb-20 glass-card p-8 md:p-12 border-l-4 border-ukred hover-lift">
+            <p class="text-xl md:text-2xl italic leading-relaxed text-slate-200">
+                「身為一個對公共事務略有涉獵的觀察者，我們常習慣將目光投射在唐寧街 10 號的權力更迭...然而，若要探尋民主政治最真實的末梢神經，我們必須把視角下移，降落到那些看似瑣碎、甚至有些『平庸』的家門口日常。」
+            </p>
+        </div>
+
+        <article class="prose max-w-none">
+            <p>為什麼每年五月的第一個星期四，全英國的政治人物都像在參加一場賭上職涯的聯考？這場「家門口大戲」到底在演什麼？</p>
+
+            <h4>一、 別小看你家門口的「小事」</h4>
+            <p>在許多人的認知裡，政治是關於外交、國防或宏觀經濟的宏大敘事。但對於英國選民而言，政治往往從一張垃圾分類的清單開始。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+                <div class="glass-card p-6 border-t border-white/10">
+                    <div class="text-ukred mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </div>
+                    <h5 class="text-xl font-bold mb-2">生活底色</h5>
+                    <p class="text-sm text-slate-400">地方選舉決定了誰來負責你的垃圾回收頻率、路燈亮不亮、柏油路是否有坑洞。</p>
+                </div>
+                <div class="glass-card p-6 border-t border-white/10">
+                    <div class="text-ukblue mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h5 class="text-xl font-bold mb-2">情緒宣洩</h5>
+                    <p class="text-sm text-slate-400">當選民發現垃圾桶三週沒清空時，對中央政府的滿意度通常會瞬間崩塌。</p>
+                </div>
+            </div>
+
+            <h4>二、 角色介紹：誰是這場大戲的主角？</h4>
+            <p>這場大戲的卡司陣容相當多樣，主要分為三大類：</p>
+            
+            <div class="space-y-4 my-8">
+                <div class="flex gap-6 p-6 glass-card hover:bg-white/5 transition-colors">
+                    <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-ukblue/20 text-ukblue font-bold text-2xl">1</div>
+                    <div>
+                        <h5 class="text-xl font-bold text-white mb-1">地方議會議員 (Councillors)</h5>
+                        <p class="text-slate-400">社區的「超級管家」。審理房屋擴建申請、安排長照福利，處理最接地氣的資源分配。</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 p-6 glass-card hover:bg-white/5 transition-colors">
+                    <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-ukred/20 text-ukred font-bold text-2xl">2</div>
+                    <div>
+                        <h5 class="text-xl font-bold text-white mb-1">直選市長 (Mayors)</h5>
+                        <p class="text-slate-400">手握交通、住房與經濟發展重金預算的「地方土霸王」，如倫敦、曼徹斯特市長。</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 p-6 glass-card hover:bg-white/5 transition-colors">
+                    <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-green-500/20 text-green-500 font-bold text-2xl">3</div>
+                    <div>
+                        <h5 class="text-xl font-bold text-white mb-1">警察與犯罪事務專員 (PCCs)</h5>
+                        <p class="text-slate-400">負責監督警察局長、制定預算。決定社區治安好壞與警力分配。</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>三、 歷史時光機：這套制度是怎麼「混」出來的？</h4>
+            <p>英國的制度從來不是一天建成的，而是一場緩慢的「有機演化」。</p>
+            <div class="relative pl-8 border-l-2 border-slate-700 space-y-12 my-12">
+                <div class="relative">
+                    <div class="absolute -left-10 top-0 w-4 h-4 rounded-full bg-ukblue border-4 border-slate-950"></div>
+                    <h6 class="text-ukblue font-bold tracking-widest mb-2">1835 年</h6>
+                    <p class="text-white font-bold text-lg">《市政法案》</p>
+                    <p class="text-slate-400">開始將地方政府法制化，告別混亂與門閥色彩。</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-10 top-0 w-4 h-4 rounded-full bg-ukred border-4 border-slate-950"></div>
+                    <h6 class="text-ukred font-bold tracking-widest mb-2">1972 年</h6>
+                    <p class="text-white font-bold text-lg">雙層體制確立</p>
+                    <p class="text-slate-400">郡（County）與區（District）像疊羅漢一樣各司其職。</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -left-10 top-0 w-4 h-4 rounded-full bg-white border-4 border-slate-950"></div>
+                    <h6 class="text-white font-bold tracking-widest mb-2">90 年代末至今</h6>
+                    <p class="text-white font-bold text-lg">權力下放 (Devolution)</p>
+                    <p class="text-slate-400">大倫敦政府成立，「北部大國」計劃啟動，地方擁有了與倫敦抗衡的能量。</p>
+                </div>
+            </div>
+
+            <h4>四、 現場直擊：2024 選舉到底在吵什麼？</h4>
+            <p>剛剛過去的 2024 年地方選舉，被公認為全國大選的「前哨戰」。</p>
+            <div class="bento-grid my-10">
+                <div class="col-span-12 md:col-span-7 glass-card p-8 flex flex-col justify-center border-b-4 border-red-500">
+                    <span class="text-red-500 font-bold mb-2">#紅藍大戰</span>
+                    <h5 class="text-2xl font-bold mb-4">工黨拆掉「藍牆」</h5>
+                    <p class="text-slate-400">工黨展現驚人爆發力，反映選民對保守黨長年執政的審美疲勞。</p>
+                </div>
+                <div class="col-span-12 md:col-span-5 glass-card p-8 flex flex-col justify-center border-b-4 border-green-500">
+                    <span class="text-green-500 font-bold mb-2">#小草逆襲</span>
+                    <h5 class="text-2xl font-bold mb-4">多元替代方案</h5>
+                    <p class="text-slate-400">自由民主黨與綠黨強勁，選民不再滿足「兩害相權取其輕」。</p>
+                </div>
+                <div class="col-span-12 glass-card p-8 bg-gradient-to-br from-ukblue/20 to-ukred/20">
+                    <h5 class="text-2xl font-bold mb-2">民生才是硬道理</h5>
+                    <p class="text-slate-200">當伯明罕這樣的重鎮喊出預算告急時，選民的憤怒是跨越黨派的。</p>
+                </div>
+            </div>
+
+            <h4>五、 辛辣議題：這些事，英國人也吵翻天！</h4>
+            <div class="space-y-6">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <h5 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-ukred"></span> Voter ID 爭議
+                    </h5>
+                    <p class="text-slate-400 text-sm">2023新規定要求投票必須帶證件。是防作票，還是為難沒有駕照的窮人與老人？</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <h5 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-ukblue"></span> 投票率的尷尬
+                    </h5>
+                    <p class="text-slate-400 text-sm">投票率常低於 40%，甚至低至 20%。五人裡只有一人投票，這民主夠具代表性嗎？</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <h5 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-yellow-500"></span> 「破產」的陰影
+                    </h5>
+                    <p class="text-slate-400 text-sm">伯明罕議會實質破產。沒錢修路、沒錢辦圖書館，是中央撥款太少還是地方太敗家？</p>
+                </div>
+            </div>
+
+            <h4>六、 未來預言：英國地方政治的下一站？</h4>
+            <p>未來的英國地方政治正朝著幾個方向演變：首先是**「市長化」**的趨勢。中央政府似乎越來越喜歡把權力交給單一的強勢市長。其次是**多黨混戰**，選票分布將更加碎片化。</p>
+            <p>最後，制度改革的呼聲從未停止。英格蘭是否會效仿蘇格蘭，將「相對多數制」改為更公平的「比例代表制」？那套從 1990 年代就沒動過的地方稅收（Council Tax）制度，是否也該來場大整修？這些都是未來幾年的政治看點。</p>
+        </article>
+
+        <!-- Conclusion -->
+        <section class="mt-20 p-12 glass-card bg-gradient-to-br from-ukblue/10 to-ukred/10 border-none relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-white/5 rounded-full"></div>
+            <div class="relative z-10">
+                <h3 class="font-display font-extrabold text-3xl mb-6">結語：民主，就是從關心你的社區開始</h3>
+                <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                    英國地方選舉雖然沒有全國大選那種「決定國家命運」的華麗修辭，但它卻最誠實地反映了民主的基層運作。它提醒我們，政治不只是電視上的演說，更是水龍頭流出的水、路邊的垃圾桶與晚上的街道安全。
+                </p>
+                <p class="text-sm font-display tracking-widest text-slate-500 uppercase">
+                    下次五月，當你看到英國政客為了幾個議席緊張兮兮時，別忘了，那正是民主在「家門口」最真實的模樣。
+                </p>
+            </div>
+        </section>
+
+        <!-- Post Footer Meta -->
+        <div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-ukblue to-ukred"></div>
+                <div>
+                    <p class="text-white font-bold">Public Affairs Observer</p>
+                    <p class="text-xs text-slate-500 uppercase tracking-tighter">B11208048 • Analysis Report</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <button class="px-6 py-2 rounded-full glass-card text-sm font-bold hover:bg-white/10 transition-all">Share</button>
+                <button class="px-6 py-2 rounded-full bg-white text-slate-950 text-sm font-bold hover:bg-slate-200 transition-all">Follow Insight</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple scroll animation for the progress bar
+        const scrollBar = document.createElement('div');
+        scrollBar.style.position = 'fixed';
+        scrollBar.style.top = '0';
+        scrollBar.style.left = '0';
+        scrollBar.style.height = '3px';
+        scrollBar.style.background = 'linear-gradient(90deg, #00247D, #CF142B)';
+        scrollBar.style.zIndex = '9999';
+        scrollBar.style.transition = 'width 0.1s ease-out';
+        document.body.appendChild(scrollBar);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollBar.style.width = scrolled + "%";
+        });
+    </script>
+</body>
+</html>
