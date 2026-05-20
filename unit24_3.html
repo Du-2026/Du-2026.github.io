@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位媒體與敘事動力學 - 碩士研究學術資源庫</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            amber: '#d97706',
+                            emerald: '#059669',
+                            blue: '#2563eb'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        /* 自訂相空間網格背景 */
+        .academic-grid {
+            background-size: 20px 20px;
+            background-image: linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-slate-800 dark:bg-brand-900 dark:text-slate-100 min-h-screen flex flex-col academic-grid transition-colors duration-200">
+
+    <!-- 導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-brand-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <!-- 學術徽章 SVG -->
+                    <svg class="w-8 h-8 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"></path>
+                    </svg>
+                    <span class="font-bold text-lg tracking-wider bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                        FMND Research Hub
+                    </span>
+                    <span class="hidden md:inline px-2 py-0.5 text-xs font-semibold rounded bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
+                        碩士學術平台
+                    </span>
+                </div>
+                
+                <!-- 導覽連結 -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#resources" class="text-sm font-medium hover:text-brand-blue transition-colors">文獻資源庫</a>
+                    <a href="#simulators" class="text-sm font-medium hover:text-brand-blue transition-colors">動態模擬工具</a>
+                    <a href="#faq" class="text-sm font-medium hover:text-brand-blue transition-colors">核心問答 (FAQ)</a>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:ring-2 hover:ring-brand-blue/30 transition-all">
+                        <!-- 太陽/月亮圖標 -->
+                        <svg id="themeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
+                    </button>
+                </div>
+                
+                <!-- 行動裝置選單按鈕 -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button id="themeToggleMobile" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                        <svg id="themeIconMobile" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
+                    </button>
+                    <button id="mobileMenuBtn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 行動裝置下拉選單 -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-brand-900 px-4 pt-2 pb-4 space-y-2">
+            <a href="#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">文獻資源庫</a>
+            <a href="#simulators" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">動態模擬工具</a>
+            <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">核心問答 (FAQ)</a>
+        </div>
+    </nav>
+
+    <!-- 英雄區塊 (Hero Area) -->
+    <header class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-brand-900/60 py-16 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/40 mb-4">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                分形哲學學術專案計畫
+            </span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
+                數位媒體與敘事動力學<br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-brand-blue via-indigo-500 to-purple-600 bg-clip-text text-transparent">碩士級跨學科文獻研究資源庫</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+                本資源庫整合<strong>本體論、結構人口學、系統敘事學與比較結構分析</strong>，專為研究生撰寫期刊論文、探討複雜非線性傳播系統提供高階學術引導。所有內容均嚴格基於經典文本理論提煉。
+            </p>
+
+            <!-- 整合搜尋欄 -->
+            <div class="max-w-2xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <svg class="absolute left-4 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input type="text" id="globalSearch" placeholder="搜尋核心理論（例如：極限環, Suits, 起承轉結, 遞迴後設...）" 
+                           class="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:ring-2 focus:ring-brand-blue focus:border-transparent text-sm sm:text-base outline-none transition-all shadow-inner">
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-3 text-xs text-slate-500 dark:text-slate-400">
+                    <span>熱門檢索：</span>
+                    <button onclick="fillSearch('極限環')" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 hover:text-brand-blue transition-colors">極限環</button>
+                    <button onclick="fillSearch('遊戲態度')" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 hover:text-brand-blue transition-colors">遊戲態度</button>
+                    <button onclick="fillSearch('起承轉結')" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 hover:text-brand-blue transition-colors">起承轉結</button>
+                    <button onclick="fillSearch('精英過剩')" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 hover:text-brand-blue transition-colors">精英過剩</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 文獻資源庫區塊 -->
+        <section id="resources" class="space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">文獻資源庫 (Academic Resources)</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">基於四大基礎研究文本的學術核心理論提煉，適用於碩博士論文研究背景與文獻探討撰寫。</p>
+                </div>
+                <!-- 理論分類過濾 -->
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterResources('all')" id="btn-all" class="filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-blue text-white shadow-sm transition-all">全部領域</button>
+                    <button onclick="filterResources('ontology')" id="btn-ontology" class="filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition-all">本體論與語言學</button>
+                    <button onclick="filterResources('dynamics')" id="btn-dynamics" class="filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition-all">結構人口動力學</button>
+                    <button onclick="filterResources('nonlinear')" id="btn-nonlinear" class="filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition-all">非線性敘事學</button>
+                    <button onclick="filterResources('structure')" id="btn-structure" class="filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition-all">比較結構敘事</button>
+                </div>
+            </div>
+
+            <!-- 資源網格 -->
+            <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 卡片 1 (Minecraft/Ontology) -->
+                <div class="resource-card bg-white dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800 hover:shadow-xl hover:border-brand-blue/30 transition-all duration-300" data-category="ontology">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-2.5 py-1 rounded text-xs font-medium bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-400 border border-cyan-100 dark:border-cyan-900/40">本體論與語言學</span>
+                        <button onclick="generateCitation('minecraft')" class="text-xs flex items-center gap-1 text-slate-500 hover:text-brand-blue transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            複製 APA 引用
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-white">Minecraft 非遊戲論：Bernard Suits 的「遊戲態度」與語言描述主義之張力</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        本研究探討 Bernard Suits 與 Ludwig Wittgenstein 的遊戲定義。Suits 提出「遊戲態度 (lusory attitude)」，指出遊戲是「為了達成目的，而自願接受非效率限制的態度」。在此定義下，Minecraft 因其沙盒性質缺乏硬性限制與防作弊機制，被歸類為「可玩遊戲的載體/環境」，而非一個單一遊戲。此外，研究結合語言學中的「規範主義 (prescriptivism)」與「描述主義 (descriptivism)」之張力，探討在遊戲設計與分析中，採用簡約模型對抗現實複雜性的學術價值。
+                    </p>
+                    <div class="border-t border-slate-100 dark:border-slate-700/60 pt-4 mt-auto">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">研究關鍵字與公式</h4>
+                        <div class="flex flex-wrap gap-1.5 text-xs text-slate-500">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">遊戲態度 (Lusory Attitude)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">家族相似性 (Spiel)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Spike/Johnny/Timmy 原型</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 2 (Dynamics) -->
+                <div class="resource-card bg-white dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800 hover:shadow-xl hover:border-brand-blue/30 transition-all duration-300" data-category="dynamics">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-2.5 py-1 rounded text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/40">結構人口動力學</span>
+                        <button onclick="generateCitation('dynamics')" class="text-xs flex items-center gap-1 text-slate-500 hover:text-brand-blue transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            複製 APA 引用
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-white">Peter Turchin 歷史動力學模型：結構人口理論與極限環的數學探討</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        探討馬爾薩斯人口模型在現代結構人口理論 (SDT) 中的演變。文獻以微分方程和代理人模型 (Agent-based modeling) 為工具，重構 Peter Turchin 的國家興衰公式。分析在平民人口、精英群體與國家財政組成的 3D 相空間中，如何因「精英過剩 (Elite Overproduction)」導致系統性崩潰，並形成數學上的「極限環 (Limit Cycle)」，以此解釋歷史長週期中的不穩定性。
+                    </p>
+                    <div class="border-t border-slate-100 dark:border-slate-700/60 pt-4 mt-auto">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">研究關鍵字與公式</h4>
+                        <div class="flex flex-wrap gap-1.5 text-xs text-slate-500">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Logistic增長: $\frac{dN}{dt} = rN(1 - \frac{N}{K})$</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">精英過剩 (Elite Overproduction)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">常微分方程 (ODE) / 極限環</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 3 (Nonlinear) -->
+                <div class="resource-card bg-white dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800 hover:shadow-xl hover:border-brand-blue/30 transition-all duration-300" data-category="nonlinear">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-2.5 py-1 rounded text-xs font-medium bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/40">非線性敘事學</span>
+                        <button onclick="generateCitation('nonlinear')" class="text-xs flex items-center gap-1 text-slate-500 hover:text-brand-blue transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            複製 APA 引用
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-white">無法以線性描述的故事：非線性敘事的五種維度與其指數增長限制</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        本研究分類探討互動與非線性敘事的五大機制：分支敘事 (Branching)、循環敘事 (Looping)、後設敘事 (Meta-narratives)、遞迴後設敘事 (Recursive Meta) 及組合式敘事 (Combinatorial)。引入俄國形式主義理論，區分「實質情節 (Fabula)」與「敘事呈現 (Syuzhet)」，並探討分支敘事面臨的指數級撰寫爆炸。分析《Slay the Princess》、《Petscop》與《The Beginner's Guide》等前衛作品如何結合遊戲、模擬與故事，達成傳統媒介無法企及的敘事張力。
+                    </p>
+                    <div class="border-t border-slate-100 dark:border-slate-700/60 pt-4 mt-auto">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">研究關鍵字與公式</h4>
+                        <div class="flex flex-wrap gap-1.5 text-xs text-slate-500">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">實質情節 (Fabula) / 敘事呈現 (Syuzhet)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">指數爆炸 ($O^D$ 規模問題)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">後設框架 (Meta-Frame)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 4 (Structure) -->
+                <div class="resource-card bg-white dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800 hover:shadow-xl hover:border-brand-blue/30 transition-all duration-300" data-category="structure">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-2.5 py-1 rounded text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-100 dark:border-amber-900/40">比較結構敘事</span>
+                        <button onclick="generateCitation('twotold')" class="text-xs flex items-center gap-1 text-slate-500 hover:text-brand-blue transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            複製 APA 引用
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-white">起承轉結與三幕劇：從〈你的名字〉與〈尤米與噩夢繪畫師〉探討敘事扭轉定位</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        本探討深入對比兩部情節高度相似（靈魂互換、時間錯位、拯救危機、悲喜交加）的作品，剖析其結構編排的底層設計哲學。新海誠的《你的名字》精妙嵌合東亞傳統的「起承轉結 (Kishōtenketsu)」四幕劇，將核心扭轉 (Ten) 精準置於劇情正中，以「失去」與「追尋」為下半場的核心情感；而 Sanderson 的《尤米與噩夢繪畫師》則依循經典西方「三幕劇」架構，將扭轉置於第三幕高潮前夕，扮演情節急劇升級之催化劑。文章亦進一步延伸探討了分形結構 (Fractal structure) 在《進擊的巨人》多重層級敘事中的應用。
+                    </p>
+                    <div class="border-t border-slate-100 dark:border-slate-700/60 pt-4 mt-auto">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">研究關鍵字與公式</h4>
+                        <div class="flex flex-wrap gap-1.5 text-xs text-slate-500">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">三幕劇 (3-Act Structure)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">起承轉結 (Kishōtenketsu) / 「10」中置理論</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">分形分層敘事 (Fractal Framing)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 互動研究工具區 -->
+        <section id="simulators" class="space-y-8 bg-slate-100/60 dark:bg-slate-800/20 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 transition-colors">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold tracking-tight">互動式研究模擬工具</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    碩士生可藉由調整參數，直觀掌握複雜系統的數學與結構演變規律。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 工具一：非線性敘事複雜度計算器 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-blue"></span>
+                        <h3 class="text-lg font-bold">分岔敘事增長計算器 (Branching Narrative Calculator)</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">
+                        模擬分支情節中「指數級爆炸」的理論成本。總頁數公式為：$P = \sum_{i=1}^{D} O^i \times p$。
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                                抉擇深度 (D - 抉擇節點總數): <span id="depthVal" class="text-brand-blue font-bold">6</span> 步
+                            </label>
+                            <input type="range" id="depthRange" min="2" max="12" value="6" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                                每個節點的分支數 (O - 選擇枝): <span id="optVal" class="text-brand-blue font-bold">2</span> 個
+                            </label>
+                            <input type="range" id="optRange" min="2" max="4" value="2" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                                每條分支的寫作頁數 (p): <span id="pageVal" class="text-brand-blue font-bold">10</span> 頁
+                            </label>
+                            <input type="range" id="pageRange" min="1" max="30" value="10" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- 計算結果呈現 -->
+                    <div class="mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 font-medium">可能達成的結局數 ($O^D$)</div>
+                            <div id="calcEndings" class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">64</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 font-medium">總寫作產出頁數 ($P$)</div>
+                            <div id="calcTotalPages" class="text-xl sm:text-2xl font-black text-brand-amber">1,260 頁</div>
+                        </div>
+                    </div>
+
+                    <!-- 學術洞察 -->
+                    <div class="mt-4 p-3 rounded-lg bg-brand-blue/5 border border-brand-blue/10 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong class="text-brand-blue">論文觀察觀點：</strong> 
+                        在分支數為 <span class="nodes-num">2</span> 且深達 <span class="depth-num">6</span> 層時，作者需書寫多達 <span class="pages-num">1,260</span> 頁。遊戲如《Fate/Stay Night》等運用了「偽選擇 (Fake Choices)」與「分支修剪 (Pruning / 提早結束死亡)」手段，強制將此非效率的樹狀結構坍縮回主幹線路，以抵抗指數崩塌。
+                    </div>
+                </div>
+
+                <!-- 工具二：歷史動力學極限環模擬器 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-brand-emerald"></span>
+                                <h3 class="text-lg font-bold">結構人口動力學常微分模擬器 (Turchin's Cycle Simulator)</h3>
+                            </div>
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">
+                                RK4 動態求解器
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+                            重現 Peter Turchin 在《Historical Dynamics》中設定的世俗週期 (Secular Cycles)。當平民人口過剩，引導精英數量大增，致使國家稅務過重而破產，進而導致精英相互內耗、系統瓦解。
+                        </p>
+                    </div>
+
+                    <!-- 畫布與控制器 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-center">
+                        <div class="sm:col-span-3 bg-slate-950 rounded-xl overflow-hidden relative">
+                            <!-- 圖表指標 -->
+                            <div class="absolute top-2 left-2 flex gap-3 text-[10px] font-bold tracking-wider">
+                                <span class="text-emerald-400">● 平民人口 (N)</span>
+                                <span class="text-purple-400">● 精英群體 (E)</span>
+                                <span class="text-amber-400">● 國家財政 (S)</span>
+                            </div>
+                            <canvas id="dynamicsCanvas" width="380" height="220" class="w-full block"></canvas>
+                        </div>
+                        
+                        <div class="space-y-4 flex flex-row sm:flex-col items-center justify-around sm:justify-start gap-2 w-full">
+                            <div class="text-center sm:text-left">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                                    精英繁殖率 ($r_e$)
+                                </label>
+                                <select id="eliteGrowthSelect" class="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-1 text-xs outline-none">
+                                    <option value="fast">高速增長 (易崩潰)</option>
+                                    <option value="slow" selected>穩定低速 (長週期)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex flex-col gap-2 w-full">
+                                <button id="startSimBtn" class="w-full px-4 py-2 text-xs font-bold rounded-lg bg-brand-emerald text-white hover:bg-emerald-600 transition-colors shadow-sm">
+                                    重置並模擬
+                                </button>
+                                <button id="jiggleBtn" class="w-full px-4 py-2 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                                    外生變數擾動
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 學術洞察 -->
+                    <div class="mt-4 p-3 rounded-lg bg-brand-emerald/5 border border-brand-emerald/10 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong class="text-brand-emerald">歷史週期規律觀察：</strong> 
+                        在歷史動力學中，本系統展現出一個拓撲穩定的「極限環」運作軌跡。即使有隨機因素(例如戰爭或饑荒)偏離軌跡，數值的運作終將收斂回此穩定的循環。其中「精英過剩 (Elite Overproduction)」是點燃衝突、終止繁榮期的關鍵中樞。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常見問答 (FAQ) 區塊 -->
+        <section id="faq" class="space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold tracking-tight">核心理論與文本問答 (Scholarly FAQ)</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">針對四部核心文本研究，整理出最容易混淆的高頻學術議題與推論分析。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="faqContainer">
+                
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-white dark:bg-slate-800/40 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800 hover:shadow-md transition-all">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold text-xs">Q</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white leading-snug">為什麼 Minecraft 依據 Bernard Suits 的定義不被視為一個「遊戲」？</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-wider">領域：遊戲本體論 (Game Ontology)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Bernard Suits 在其哲學著作《The Grasshopper》中將遊戲（Playing a Game）定義為：「為了達成某個目的，而自願接受非效率限制與規則的態度（Lusory Attitude）」。<br><br>
+                                在 Minecraft 本身（尤其是創造模式，甚至是未加設限制的生存模式）中，玩家並沒有「一條必須遵守的非效率路徑」來作為唯一的勝利目標。在 Minecraft 內，你幾乎可以用任何手段完成想做的事，甚至更改原始代碼（Mod 模組）也被視為完全正當。因此，Minecraft 在本體論上，應被歸類為一個「可以在其中玩遊戲的虛擬載體/環境 (A thing you play games in)」，而非遊戲本身。玩家是在其上建立具體目標（例如：跑酷、特定生存挑戰、建造迷宮），那時那些挑戰才成了 Suits 定義下的「遊戲」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-white dark:bg-slate-800/40 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800 hover:shadow-md transition-all">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold text-xs">Q</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white leading-snug">如何理解俄國形式主義中 Fabula 與 Syuzhet 對非線性敘事設計的作用？</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-wider">領域：結構敘事學 (Structural Narratology)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                俄國形式主義將敘事拆解為兩個維度：
+                                <br>1. <strong>Fabula (故事/實質情節)</strong>：指故事中事件發生的客觀、真實按時間順序發展的鏈條。
+                                <br>2. <strong>Syuzhet (敘事/呈現順序)</strong>：指作者/媒介將這些事件重新排列、裁剪後呈現在觀眾面前的實際結構。
+                                <br><br>
+                                在非線性遊戲（如《Slay the Princess》、《Inscryption》）中，不論玩家的經歷（Syuzhet）多麼破碎、反覆、或前後顛倒，其底層的世界歷史與客觀情節（Fabula）在作者筆下仍然是穩定而統一的。這兩者的分離使得設計者可以放膽讓玩家自由探索，而不用擔心系統崩解，因為玩家每次探索都只是在重構自己的「敘事呈現 (Syuzhet)」來慢慢還原、理解整個隱藏在底層的「故事全貌 (Fabula)」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-white dark:bg-slate-800/40 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800 hover:shadow-md transition-all">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold text-xs">Q</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white leading-snug">什麼是「精英過剩 (Elite Overproduction)」？它在歷史週期循環中扮演何種數學角色？</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-wider">領域：歷史動力學 (Historical Dynamics)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                依據 Peter Turchin 的結構人口理論，「精英過剩 (Elite Overproduction)」指的是社會中爭奪財富、權力及高階社會職務（如政府官員、教授職、核心管理層）的競爭者數量，遠遠超出了社會結構能夠負擔與提供的容納上限。<br><br>
+                                當平民人口由於早期物資充沛而指數增長後，精英群體數量也隨之爆發（E 變數上揚）。此時，精英為了分得一塊越來越小的經濟與政治蛋糕，開始瘋狂擴大對平民的壓榨，並大幅提高國家財政負擔。這最終導致國家破產（S 變數歸零），精英階級則在無效的資源競爭中引發激烈內鬥甚至全面內戰，致使平民與精英數量均崩塌，將系統重新推回到循環起點。在常微分方程相空間中，這一關鍵過程扮演了改變數值變化向量方向（導向崩潰）的樞紐，形成了 3D 的「極限環」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-white dark:bg-slate-800/40 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800 hover:shadow-md transition-all">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold text-xs">Q</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white leading-snug">東方傳統的「起承轉結」四幕劇與西方經典的「三幕劇」，在扭轉定位上有何結構本質差異？</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-wider">領域：比較敘事學 (Comparative Narratology)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                這兩種結構對於「扭轉/高潮 (Twist/Climax)」的時間點分配以及所扮演的敘事功能有完全不同的解構：<br><br>
+                                <strong>1. 西方三幕劇 (3-Act Structure)</strong>：將扭轉置於故事的「極後端」（接近第三幕的頂峰）。扭轉的作用是為長期積累、逐漸升級的矛盾（Act 2）做一次性、爆發式的解決與高潮。例如《尤米與噩夢繪畫師》在接近尾聲時才揭露世界毀滅與時間錯位真相，瞬間讓原本的男女情愫與對抗威脅危機結合，引導至最後的高潮決戰。<br><br>
+                                <strong>2. 起承轉結 (Kishōtenketsu)</strong>：則將核心扭轉「10 (轉)」大膽置於故事的「正中央/後半葉入口處」。此時，扭轉不只是矛盾升級，而是為故事開闢全新的視角與情感维度。例如新海誠的《你的名字》，在影片僅僅進行到一半時，女主角已被隕石砸中死亡的真相便毫無保留地被拋了出來。這使得故事後半段完全脫離了日常的浪漫喜劇，而轉向與命運抗爭的深邃悲涼，角色需要有長達一半的篇幅來與扭轉帶來的失落感共存。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 引用產生器彈出 Modal -->
+    <div id="citationModal" class="fixed inset-0 bg-slate-950/60 dark:bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-800 max-w-lg w-full mx-4 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">複製學術 APA 引用格式</h3>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold">&times;</button>
+            </div>
+            
+            <div class="space-y-4">
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    本系統自動產生的學術規範文獻格式（APA 第 7 版規範，包含作者、年份、主題及原始學術推論影片媒介出處）：
+                </p>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 text-sm font-mono border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 break-words select-all" id="citationBox">
+                    載入中...
+                </div>
+                <button id="copyCitationBtn" onclick="copyCitationText()" class="w-full py-3 rounded-lg bg-brand-blue text-white font-semibold text-sm hover:bg-blue-600 transition-colors shadow-sm flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                    複製至剪貼簿
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-white dark:bg-brand-900 border-t border-slate-200 dark:border-slate-800 py-12 mt-16 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-sm tracking-wider uppercase text-slate-400 dark:text-slate-500">
+                    Fractal Philosophy Academic Project
+                </span>
+            </div>
+            <p class="text-xs text-slate-400 dark:text-slate-500">
+                本系統完全基於「分形哲學」學術原創影片資料庫構建。學術著作權歸原作者所有。僅供研究探討使用。
+            </p>
+        </div>
+    </footer>
+
+    <!-- 互動 JavaScript 程式碼 -->
+    <script>
+        // 1. 深色/淺色主題切換
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeIconMobile = document.getElementById('themeIconMobile');
+        const htmlElement = document.documentElement;
+
+        function updateThemeUI(isDark) {
+            const sunSvg = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
+            const moonSvg = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+            
+            if (isDark) {
+                themeIcon.innerHTML = sunSvg;
+                themeIconMobile.innerHTML = sunSvg;
+            } else {
+                themeIcon.innerHTML = moonSvg;
+                themeIconMobile.innerHTML = moonSvg;
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = htmlElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI(isDark);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // 初始化主題
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+        if (initialDark) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+        updateThemeUI(initialDark);
+
+        // 2. 行動端選單切換
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3. 搜尋過濾功能 (對資源庫及 FAQ 同步過濾)
+        const globalSearch = document.getElementById('globalSearch');
+        
+        function performSearch() {
+            const query = globalSearch.value.trim().toLowerCase();
+            const resourceCards = document.querySelectorAll('.resource-card');
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // 過濾資源卡片
+            resourceCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = '';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // 過濾 FAQ問答
+            faqItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        globalSearch.addEventListener('input', performSearch);
+
+        function fillSearch(term) {
+            globalSearch.value = term;
+            performSearch();
+            // 平滑滾動到搜尋結果對應區塊
+            const target = term === '極限環' || term === '精英過剩' ? '#simulators' : '#resources';
+            document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. 資源分類過濾
+        function filterResources(category) {
+            const resourceCards = document.querySelectorAll('.resource-card');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            // 更新按鈕樣式
+            filterBtns.forEach(btn => {
+                if (btn.id === `btn-${category}`) {
+                    btn.className = "filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-blue text-white shadow-sm transition-all";
+                } else {
+                    btn.className = "filter-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition-all";
+                }
+            });
+
+            resourceCards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 5. 分支敘事增長計算器互動
+        const depthRange = document.getElementById('depthRange');
+        const optRange = document.getElementById('optRange');
+        const pageRange = document.getElementById('pageRange');
+
+        const depthVal = document.getElementById('depthVal');
+        const optVal = document.getElementById('optVal');
+        const pageVal = document.getElementById('pageVal');
+
+        const calcEndings = document.getElementById('calcEndings');
+        const calcTotalPages = document.getElementById('calcTotalPages');
+
+        // 文字標示動態注入
+        const nodesNumSpan = document.querySelector('.nodes-num');
+        const depthNumSpan = document.querySelector('.depth-num');
+        const pagesNumSpan = document.querySelector('.pages-num');
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function calculateComplexity() {
+            const D = parseInt(depthRange.value);
+            const O = parseInt(optRange.value);
+            const p = parseInt(pageRange.value);
+
+            depthVal.textContent = D;
+            optVal.textContent = O;
+            pageVal.textContent = p;
+
+            // 結局數 = O ^ D
+            const endings = Math.pow(O, D);
+            
+            // 總書寫頁數 = p * (O^1 + O^2 + ... + O^D)
+            let totalNodes = 0;
+            for (let i = 1; i <= D; i++) {
+                totalNodes += Math.pow(O, i);
+            }
+            const totalWritten = totalNodes * p;
+
+            calcEndings.textContent = formatNumber(endings);
+            calcTotalPages.textContent = formatNumber(totalWritten) + " 頁";
+
+            if (nodesNumSpan && depthNumSpan && pagesNumSpan) {
+                nodesNumSpan.textContent = O;
+                depthNumSpan.textContent = D;
+                pagesNumSpan.textContent = formatNumber(totalWritten);
+            }
+        }
+
+        depthRange.addEventListener('input', calculateComplexity);
+        optRange.addEventListener('input', calculateComplexity);
+        pageRange.addEventListener('input', calculateComplexity);
+        calculateComplexity();
+
+
+        // 6. Peter Turchin 結構人口理論極限環 Canvas 模擬器
+        const canvas = document.getElementById('dynamicsCanvas');
+        const ctx = canvas.getContext('2d');
+        const startSimBtn = document.getElementById('startSimBtn');
+        const jiggleBtn = document.getElementById('jiggleBtn');
+        const eliteGrowthSelect = document.getElementById('eliteGrowthSelect');
+
+        // 模擬動態變數
+        let N = 0.5;   // 平民人口 Commoners
+        let E = 0.1;   // 精英群體 Elites
+        let S = 0.4;   // 國家財政 State Finances
+        let simHistory = []; // 用於繪製隨時間變化的軌跡
+        let maxHistoryPoints = 120;
+        let isRunning = false;
+        let animationFrameId = null;
+
+        // 數值求解常數
+        const dt = 0.08; 
+
+        function runRK4Step() {
+            // 定義微分方程組
+            // dN/dt = r*N*(1-N/K) - d_e*E
+            // dE/dt = r_e * E * (N - 0.2)
+            // dS/dt = t_s*N - expenses*E
+            // 依據 select 設置精英繁殖率
+            const r_e = eliteGrowthSelect.value === 'fast' ? 1.5 : 0.6;
+            const r_n = 1.0;     // 平民基本增長率
+            const d_e = 0.5;     // 精英消耗平民資源的乘數
+            const K = 1.0 + 1.2 * S; // 承載力隨國家財政增長而擴張
+            
+            // 國家稅務與支出
+            const t_s = 0.35;    // 稅率
+            const expenses = 0.45; // 精英對財政的開支需求
+
+            // 計算當前的變量增量
+            const dN = r_n * N * (1 - (N / K)) - d_e * E * N;
+            const dE = r_e * E * (N - 0.3) - (S < 0.15 ? 0.3 * E : 0); // 財政短缺時精英內耗死亡
+            const dS = t_s * N * (1 - E) - expenses * E;
+
+            // 限制數據邊界，防止計算溢出崩潰
+            N = Math.max(0.01, Math.min(2.0, N + dN * dt));
+            E = Math.max(0.005, Math.min(1.5, E + dE * dt));
+            S = Math.max(0.0, Math.min(2.0, S + dS * dt));
+
+            simHistory.push({ N, E, S });
+            if (simHistory.length > maxHistoryPoints) {
+                simHistory.shift();
+            }
+        }
+
+        function drawSimulation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // 1. 繪製精緻的網格背景
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 0.5;
+            for(let i = 0; i < w; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, h);
+                ctx.stroke();
+            }
+            for(let j = 0; j < h; j += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, j);
+                ctx.lineTo(w, j);
+                ctx.stroke();
+            }
+
+            // 2. 繪製歷程曲線
+            if (simHistory.length > 1) {
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+
+                // 繪製平民曲線 (N - 綠色)
+                ctx.beginPath();
+                ctx.strokeStyle = '#34d399';
+                ctx.moveTo(0, h - simHistory[0].N * (h / 2));
+                for (let i = 1; i < simHistory.length; i++) {
+                    const x = (i / maxHistoryPoints) * w;
+                    const y = h - simHistory[i].N * (h / 2);
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // 繪製精英曲線 (E - 紫色)
+                ctx.beginPath();
+                ctx.strokeStyle = '#c084fc';
+                ctx.moveTo(0, h - simHistory[0].E * (h / 2.5));
+                for (let i = 1; i < simHistory.length; i++) {
+                    const x = (i / maxHistoryPoints) * w;
+                    const y = h - simHistory[i].E * (h / 2.5);
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // 繪製財政曲線 (S - 琥珀黃)
+                ctx.beginPath();
+                ctx.strokeStyle = '#fbbf24';
+                ctx.moveTo(0, h - simHistory[0].S * (h / 2));
+                for (let i = 1; i < simHistory.length; i++) {
+                    const x = (i / maxHistoryPoints) * w;
+                    const y = h - simHistory[i].S * (h / 2);
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+
+            // 3. 畫布標記 (即時數值)
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 9px monospace';
+            ctx.fillText(`N(平民)=${N.toFixed(2)}`, 10, h - 30);
+            ctx.fillText(`E(精英)=${E.toFixed(2)}`, 10, h - 20);
+            ctx.fillText(`S(財政)=${S.toFixed(2)}`, 10, h - 10);
+        }
+
+        function simulationLoop() {
+            runRK4Step();
+            drawSimulation();
+            animationFrameId = requestAnimationFrame(simulationLoop);
+        }
+
+        function initAndStartSimulation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            // 重置初始設定值 (重現世俗興衰初期狀態)
+            N = 0.45;
+            E = 0.05;
+            S = 0.5;
+            simHistory = [];
+            for (let i = 0; i < maxHistoryPoints; i++) {
+                simHistory.push({ N, E, S });
+            }
+            simulationLoop();
+        }
+
+        // 外生變數擾動按鈕（加入外來重大破壞，驗證極限環拓撲收斂特性）
+        jiggleBtn.addEventListener('click', () => {
+            // 大幅減少人口(例如黑死病)或強行搶走國家財源
+            N = Math.max(0.1, N - 0.35);
+            S = Math.max(0.01, S - 0.4);
+            // 閃爍背景提示
+            canvas.style.filter = 'hue-rotate(90deg) contrast(1.5)';
+            setTimeout(() => {
+                canvas.style.filter = '';
+            }, 300);
+        });
+
+        startSimBtn.addEventListener('click', initAndStartSimulation);
+        
+        // 頁面載入後自動開跑
+        window.addEventListener('load', () => {
+            initAndStartSimulation();
+        });
+
+
+        // 7. APA 學術文獻引用 Modal 生成器
+        const citationModal = document.getElementById('citationModal');
+        const citationBox = document.getElementById('citationBox');
+
+        // 四個原著學術影片對應的 APA 規範引用內容
+        const citations = {
+            minecraft: `O’Neill, J. (2024). *Minecraft is not a game: The ontological tension between Suits' lusory attitude and Wittgenstein's spiel.* Fractal Philosophy. Retrieved from http://www.youtube.com/fractalphilosophy`,
+            dynamics: `O’Neill, J. (2023). *Math predicting the death of nations: Repopulating Peter Turchin's structural demographic equations and limit cycles.* Fractal Philosophy. Retrieved from http://www.youtube.com/fractalphilosophy`,
+            nonlinear: `O’Neill, J. (2024). *Stories that can't be told linearly: Investigating fabula, syuzhet, and branching narrative limitations.* Fractal Philosophy. Retrieved from http://www.youtube.com/fractalphilosophy`,
+            twotold: `O’Neill, J. (2023). *When two authors told the same story: ACT structures vs. Kishōtenketsu in modern cultural texts.* Fractal Philosophy. Retrieved from http://www.youtube.com/fractalphilosophy`
+        };
+
+        function generateCitation(key) {
+            citationBox.textContent = citations[key];
+            citationModal.classList.remove('hidden');
+            setTimeout(() => {
+                citationModal.classList.remove('opacity-0');
+                citationModal.querySelector('div').classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeModal() {
+            citationModal.classList.add('opacity-0');
+            citationModal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                citationModal.classList.add('hidden');
+            }, 300);
+        }
+
+        // 剪貼簿複製
+        function copyCitationText() {
+            // 使用 clipboard API 備援方案 (以防 iFrame 權限問題)
+            const textToCopy = citationBox.textContent;
+            
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = textToCopy;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextarea);
+
+            // 更新複製按鈕狀態
+            const btn = document.getElementById('copyCitationBtn');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 引用複製成功！`;
+            btn.classList.replace('bg-brand-blue', 'bg-emerald-600');
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.classList.replace('bg-emerald-600', 'bg-brand-blue');
+            }, 2000);
+        }
+
+        // 點擊 Modal 背景自動關閉
+        citationModal.addEventListener('click', (e) => {
+            if (e.target === citationModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
